@@ -1,10 +1,8 @@
 import React from 'react'
 import './index.css'
+import { AppRouter } from './routers/AppRouter'
 export const JournalApp = () => {
     return (
-        <div>
-            <h1 className="text-3xl font-bold">React with talwind</h1>
-        </div>
-
+        <AppRouter />
     )
 }

@@ -1,0 +1,10 @@
+.nav-active {
+    color: blue;
+    transition: all 0.3s ease-in;
+}
+
+nav a {
+    color: red;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
