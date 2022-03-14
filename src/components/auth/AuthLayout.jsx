@@ -14,7 +14,7 @@ export const AuthLayout = () => {
 
   return (
     <div>
-      <Disclosure className="bg-gray-800" as={'nav'}>
+      <Disclosure className="bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 " as={'nav'} >
         {({ open }) => (
           <>
             <div className="max-w-screen-xl mx-auto px-2 sm:px-6 lg:px-8">

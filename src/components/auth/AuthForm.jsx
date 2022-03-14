@@ -29,7 +29,7 @@ export const AuthForm = ({ fields, otherFormPath, isLoginForm, title }) => {
                     <input type="hidden" name="remember" defaultValue="true" />
                     <div className="rounded-md shadow-sm -space-y-px">
                         {fields.map((field) => (
-                            <div className="py-2">
+                            <div className="py-2" key={field.title}>
                                 <label htmlFor={field.name} className="sr-only">
                                     {field.title}
                                 </label>

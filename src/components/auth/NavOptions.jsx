@@ -15,7 +15,7 @@ export const NavOptions = ({ isMobile = false }) => {
                 <NavLink key={item.name}
                     to={item.to}
                     className={({ isActive }) =>
-                        isActive ? classNames('bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium') : classNames('text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium')
+                        isActive ? classNames('bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-bold') : classNames('text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-bold')
                     }
                 >
                     {item.name}
@@ -29,7 +29,7 @@ export const NavOptions = ({ isMobile = false }) => {
                     key={item.name}
                     to={item.to}
                     className={({ isActive }) =>
-                        isActive ? classNames('bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium') : classNames('text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium')
+                        isActive ? classNames('bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-bold') : classNames('text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-bold')
                     }
                 >
                     {item.name}
