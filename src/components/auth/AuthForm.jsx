@@ -1,15 +1,24 @@
-import React from 'react'
-import { LockClosedIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-
+import { useDispatch } from 'react-redux';
+import { login, startGoogleLogin } from '../../actions/auth';
 export const AuthForm = ({ fields, otherFormPath, isLoginForm, title }) => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
 
+
+    const dispatch = useDispatch();
+
     const onSubmit = (data) => {
+        // data.preventDefault();
         console.log(data, isLoginForm);
+        dispatch(login(12345, "René Panjón"))
+
+    }
+
+    const onSubmitWithGoogle = () => {
+        dispatch(startGoogleLogin())
     }
     return (
         <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 ">
@@ -50,7 +59,7 @@ export const AuthForm = ({ fields, otherFormPath, isLoginForm, title }) => {
                                     className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder={field.title}
                                 />
-                                <ErrorMessage errors={errors} name={field.name} as="p" className='text-red-600 mt-1 ml-1'/>
+                                <ErrorMessage errors={errors} name={field.name} as="p" className='text-red-600 mt-1 ml-1' />
                             </div>
                         ))}
                     </div>
@@ -81,12 +90,24 @@ export const AuthForm = ({ fields, otherFormPath, isLoginForm, title }) => {
                             type="submit"
                             className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                                <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
-                            </span>
+
                             {title}
                         </button>
                     </div>
+                    {isLoginForm && (
+
+                        <div>
+                            <div
+                                onClick={onSubmitWithGoogle}
+                                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
+
+                                <p>
+                                    Iniciar con <span className="font-bold text-base">G</span>oogle
+                                </p>
+                            </div>
+                        </div>
+                    )}
                 </form>
             </div>
         </div>
