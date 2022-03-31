@@ -1,8 +1,16 @@
 import React from 'react'
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 
 export const AuthForm = ({ fields, otherFormPath, isLoginForm, title }) => {
+
+    const { register, formState: { errors }, handleSubmit } = useForm();
+
+    const onSubmit = (data) => {
+        console.log(data, isLoginForm);
+    }
     return (
         <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 ">
             <div className="max-w-md w-full space-y-8 rounded-3xl p-10 bg-gradient-to-r from-white to-white shadow-xl">
@@ -25,7 +33,7 @@ export const AuthForm = ({ fields, otherFormPath, isLoginForm, title }) => {
                         }
                     </p>
                 </div>
-                <form className="mt-8 space-y-8" action="#" method="POST">
+                <form className="mt-8 space-y-8" onSubmit={handleSubmit(onSubmit)}>
                     <input type="hidden" name="remember" defaultValue="true" />
                     <div className="rounded-md shadow-sm -space-y-px">
                         {fields.map((field) => (
@@ -34,14 +42,15 @@ export const AuthForm = ({ fields, otherFormPath, isLoginForm, title }) => {
                                     {field.title}
                                 </label>
                                 <input
+                                    {...register(field.name, { required: "Este campo es requerido", maxLength: 30, })}
                                     id={field.name}
                                     name={field.name}
                                     type={field.type}
                                     autoComplete={field.name}
-                                    required={field.required}
                                     className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder={field.title}
                                 />
+                                <ErrorMessage errors={errors} name={field.name} as="p" className='text-red-600 mt-1 ml-1'/>
                             </div>
                         ))}
                     </div>
