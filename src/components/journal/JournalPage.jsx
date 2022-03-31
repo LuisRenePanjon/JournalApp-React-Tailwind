@@ -1,13 +1,16 @@
 import React from 'react'
-import { SideBar } from './SideBar'
+import { NotePage } from '../notes/NotePage'
 
 export const JournalPage = () => {
 
 
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <SideBar />
+    <div>
+      {/* <SideBar /> */}
+      <main>
+        <NotePage />
+      </main>
     </div>
   )
 }
