@@ -24,13 +24,17 @@ export const uiReducer = ( state = initialState, action) => {
 				isError: false,
 				errorMsg: '',
 			};
-
-		// case 'SET_LOADING':
-		// 	return {
-		// 		...state,
-		// 		loading: action.payload
-		// 	};
-
+		case types.uiLoading:
+			return {
+				...state,
+				isLoading: true,
+			}
+		case types.uiEndLoading:
+			return {
+				...state,
+				isLoading: false,
+			}
+		
 		default:
 			return state;
 	}
