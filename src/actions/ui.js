@@ -12,3 +12,16 @@ export const removeErrorAction = () => {
 		type: types.uiRemoveError,
 	};
 }
+
+
+export const setLoadingAction = () => {
+	return {
+		type: types.uiLoading
+	};
+}
+
+export const removeLoadingAction = () => {
+	return {
+		type: types.uiEndLoading
+	};
+}
