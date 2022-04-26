@@ -1,14 +1,16 @@
-import {Link} from 'react-router-dom'
-import {useForm} from 'react-hook-form';
-import {ErrorMessage} from '@hookform/error-message';
-import {useDispatch, useSelector} from 'react-redux';
-import {startEmailPasswordLogin, startGoogleLogin, startEmailPasswordNameRegister} from '../../actions/auth';
-import {removeErrorAction, setErrorAction} from "../../actions/ui";
+import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
+import { useDispatch, useSelector } from 'react-redux';
+import { startEmailPasswordLogin, startGoogleLogin, startEmailPasswordNameRegister } from '../../actions/auth';
+import { removeErrorAction, setErrorAction } from "../../actions/ui";
+import { Spinner } from './Spinner';
 
-export const AuthForm = ({fields, otherFormPath, isLoginForm, title}) => {
+export const AuthForm = ({ fields, otherFormPath, isLoginForm, title }) => {
 
-	const {register, formState: {errors}, handleSubmit} = useForm();
-	const {errorMsg} = useSelector(state => state?.ui);
+	const { register, formState: { errors }, handleSubmit } = useForm();
+	const { errorMsg, isLoading } = useSelector(state => state?.ui);
+
 	const dispatch = useDispatch();
 
 	const onSubmit = (data) => {
@@ -44,6 +46,8 @@ export const AuthForm = ({fields, otherFormPath, isLoginForm, title}) => {
 		<div
 			className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 ">
 			<div className="max-w-md w-full space-y-8 rounded-3xl p-10 bg-gradient-to-r from-white to-white shadow-xl">
+			{isLoading && <Spinner />}
+
 				<div>
 					<img
 						className="mx-auto h-12 w-auto"
@@ -64,7 +68,7 @@ export const AuthForm = ({fields, otherFormPath, isLoginForm, title}) => {
 					</p>
 				</div>
 				<form className="mt-8 space-y-8" onSubmit={handleSubmit(onSubmit)}>
-					<input type="hidden" name="remember" defaultValue="true"/>
+					<input type="hidden" name="remember" defaultValue="true" />
 					<div className="rounded-md shadow-sm -space-y-px">
 						{fields.map((field) => (
 							<div className="py-2" key={field.title}>
@@ -72,7 +76,7 @@ export const AuthForm = ({fields, otherFormPath, isLoginForm, title}) => {
 									{field.title}
 								</label>
 								<input
-									{...register(field.name, {required: "Este campo es requerido", maxLength: 30,})}
+									{...register(field.name, { required: "Este campo es requerido", maxLength: 30, })}
 									id={field.name}
 									name={field.name}
 									type={field.type}
@@ -81,7 +85,7 @@ export const AuthForm = ({fields, otherFormPath, isLoginForm, title}) => {
 									placeholder={field.title}
 								/>
 								<ErrorMessage errors={errors} name={field.name} as="p"
-											  className='text-red-600 mt-1 ml-1'/>
+									className='text-red-600 mt-1 ml-1' />
 							</div>
 						))}
 					</div>
@@ -111,7 +115,9 @@ export const AuthForm = ({fields, otherFormPath, isLoginForm, title}) => {
 					<div>
 						<button
 							type="submit"
-							className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+							disabled={isLoading}
+							className={`group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white  hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-indigo-600
+							${isLoading && ('bg-indigo-300')}`}
 						>
 
 							{title}
