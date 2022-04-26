@@ -6,8 +6,6 @@ import { RegisterPage } from './RegisterPage'
 import { MobileMenuButton } from './MobileMenuButton'
 import { NavLogo } from './NavLogo'
 import { NavOptions } from './NavOptions'
-// import styles from './styles.module.css'
-// import './index.css'
 
 export const AuthLayout = () => {
 
