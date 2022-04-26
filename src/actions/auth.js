@@ -1,14 +1,17 @@
 import {auth, googleAuthProvider} from '../firebase/firebaseConfig';
 import {types} from '../types/types';
-import {removeErrorAction, setErrorAction} from "./ui";
+import {removeErrorAction, setErrorAction, setLoadingAction, removeLoadingAction} from "./ui";
 
 export const startEmailPasswordLogin = (email, password) => {
 	return async (dispatch) => {
 		try {
-			const {user} = await auth.signInWithEmailAndPassword(auth.getAuth(), email, password);
 			dispatch(removeErrorAction());
+			dispatch(setLoadingAction());
+			const {user} = await auth.signInWithEmailAndPassword(auth.getAuth(), email, password);
+			dispatch(removeLoadingAction());
 			dispatch(login(user.uid, user.displayName));
-		} catch (e) {
+		} catch (e) { 
+			dispatch(removeLoadingAction());
 			if (e.code === 'auth/user-not-found') {
 				dispatch(setErrorAction('Email y/o contraseña son incorrectos'));
 			} else if (e.code === 'auth/wrong-password') {
@@ -22,13 +25,17 @@ export const startEmailPasswordLogin = (email, password) => {
 
 export const startEmailPasswordNameRegister = (email, password, name) => {
 	return (dispatch) => {
+		dispatch(setLoadingAction());
 		auth.createUserWithEmailAndPassword(auth.getAuth(), email, password)
 			.then(async ({user}) => {
 				await auth.updateProfile(user, {displayName: name});
 				await auth.sendEmailVerification(user, {url: 'http://localhost:3000/'});
 				dispatch(login(user.uid, user.displayName));
+				dispatch(removeLoadingAction());
+
 			})
 			.catch(e => {
+				dispatch(removeLoadingAction());
 				console.log(e);
 			});
 	};
