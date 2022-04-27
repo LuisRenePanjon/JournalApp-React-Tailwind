@@ -57,6 +57,7 @@ export const startEmailPasswordNameRegister = (email, password, name) => {
 
 export const startGoogleLogin = () => {
     return async (dispatch) => {
+        dispatch(setLoadingAction());
         try {
             const { user } = await auth.signInWithPopup(
                 auth.getAuth(),
@@ -64,8 +65,10 @@ export const startGoogleLogin = () => {
             );
             console.log(user);
             dispatch(login(user.uid, user.displayName));
+            dispatch(removeLoadingAction());
         } catch (error) {
             console.log({ error });
+            dispatch(removeLoadingAction());
         }
     };
 };
