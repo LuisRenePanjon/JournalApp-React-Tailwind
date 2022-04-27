@@ -1,9 +1,17 @@
 import { MenuIcon, PencilAltIcon, XIcon } from '@heroicons/react/solid';
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { startLogout } from '../../actions/auth';
 import { JournalEntries } from './JournalEntries';
 
 export const SideBar = () => {
     const [showSidebar, setShowSidebar] = useState(false);
+
+    const dispatch = useDispatch()
+
+    const logout = () => {
+        dispatch(startLogout());
+    }
 
     return (
         <>
@@ -28,12 +36,12 @@ export const SideBar = () => {
 
                 <h3 className="mt-20 text-center text-3xl font-semibold text-white">Hola René</h3>
                 {/* Options */}
-                <div className=" text-white mt-10 justify-start flex flex-row items-center w-full mx-10 cursor-pointer hover:text-gray-400 transition-all" 
+                <div className=" text-white mt-10 justify-start flex flex-row items-center w-full mx-10 cursor-pointer hover:text-gray-400 transition-all"
                     onClick={() => { console.log('click'); }}>
                     <h2 className="text-xl font-medium 
                         ">Nueva entrada
                     </h2>
-                    <PencilAltIcon className="cursor-pointer justify-center ml-2 "                        
+                    <PencilAltIcon className="cursor-pointer justify-center ml-2 "
                         width="25"
                         height="25"
                     />
@@ -41,7 +49,11 @@ export const SideBar = () => {
                 <JournalEntries />
 
                 <div className="absolute top-5 right-5 w-auto">
-                    <button className="bg-red-600  p-3 rounded-md hover:bg-red-300 transition-all ease-out">Cerrar sesión</button>
+                    <button
+                        onClick={logout}
+                        className="bg-red-600  p-3 rounded-md hover:bg-red-300 transition-all ease-out">
+                        Cerrar sesión
+                    </button>
                 </div>
             </div>
         </>
