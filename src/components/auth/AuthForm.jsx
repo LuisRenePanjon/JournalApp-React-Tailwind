@@ -118,7 +118,7 @@ export const AuthForm = ({ fields, otherFormPath, isLoginForm, title }) => {
 							type="submit"
 							disabled={isLoading}
 							className={`group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white  hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-indigo-600
-							${isLoading && ('bg-indigo-300')}`}
+							${isLoading && ('bg-indigo-300 hover:bg-indigo-300')}`}
 						>
 
 							{title}
@@ -127,15 +127,17 @@ export const AuthForm = ({ fields, otherFormPath, isLoginForm, title }) => {
 					{isLoginForm && (
 
 						<div>
-							<div
+							<button
+								type="button"
+								disabled={isLoading}
 								onClick={onSubmitWithGoogle}
-								className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+								className={`group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${!isLoading ? 'bg-red-500 hover:bg-red-700': 'bg-red-300'}`}
 							>
 
 								<p>
 									Iniciar con <span className="font-bold text-base">G</span>oogle
 								</p>
-							</div>
+							</button>
 						</div>
 					)}
 				</form>
