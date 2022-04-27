@@ -4,7 +4,8 @@ import { ErrorMessage } from '@hookform/error-message';
 import { useDispatch, useSelector } from 'react-redux';
 import { startEmailPasswordLogin, startGoogleLogin, startEmailPasswordNameRegister } from '../../actions/auth';
 import { removeErrorAction, setErrorAction } from "../../actions/ui";
-import { Spinner } from './Spinner';
+import { Spinner } from '../common/Spinner';
+
 
 export const AuthForm = ({ fields, otherFormPath, isLoginForm, title }) => {
 
