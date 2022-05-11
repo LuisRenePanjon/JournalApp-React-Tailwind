@@ -1,12 +1,11 @@
 import { Disclosure } from '@headlessui/react'
 
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { LoginPage } from './LoginPage'
-import { RegisterPage } from './RegisterPage'
-import { MobileMenuButton } from './MobileMenuButton'
-import { NavLogo } from './NavLogo'
-import { NavOptions } from './NavOptions'
+import { LoginPage, RegisterPage } from '../../pages/auth'
+import { MobileMenuButton, NavLogo, NavOptions } from './'
 
+
+  
 export const AuthLayout = () => {
 
 
