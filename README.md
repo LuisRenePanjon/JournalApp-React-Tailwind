@@ -1,7 +1,7 @@
 # Ejecutar localmente
 ## Paso 1.
 
-Crear un archivo ```.env.local``` cons las siguientes variables de entorno.
+Crear un archivo e```.env.local``` en la raiz del proyecto con las siguientes variables de entorno.
 ```
 REACT_APP_FIREBASE_API_KEY
 REACT_APP_FIREBASE_AUTH_DOMAIN
@@ -16,7 +16,7 @@ Ejecutar la linea de comando ```npm install```
 
 
 ## Paso 3.
-Ejecutar ```npm run start```, la aplicación correrá en ```localhost:3000```.
+Ejecutar ```npm run start```, la aplicación correrá en ```http://localhost:3000```.
 
 
 ## Available Scripts
