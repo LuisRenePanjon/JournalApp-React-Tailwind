@@ -1,8 +1,7 @@
-import React from 'react'
 import { Provider } from 'react-redux'
-import './index.css'
-import { AppRouter } from './routers/AppRouter'
 import { store } from './store/store'
+import { AppRouter } from './routers/AppRouter'
+import './index.css'
 
 
 export const JournalApp = () => {
