@@ -1,15 +1,11 @@
 import { useEffect, useState } from 'react'
-
-import { auth } from '../firebase/firebaseConfig';
-
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { AuthLayout } from '../components/auth/AuthLayout'
-// import { LoginPage } from '../components/auth/LoginPage'
-// import { RegisterPage } from '../components/auth/RegisterPage'
-import { JournalPage } from '../components/journal/JournalPage'
 import { useDispatch } from 'react-redux';
+import { auth } from '../firebase/firebaseConfig';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { login } from '../actions/auth';
-import { LoadingPage } from '../components/common/LoadingPage';
+import { LoadingPage } from '../components/common';
+import { JournalPage } from '../pages/journal';
+import { AuthLayout } from '../components/auth';
 
 export const AppRouter = () => {
 
