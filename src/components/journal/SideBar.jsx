@@ -1,8 +1,8 @@
-import { MenuIcon, PencilAltIcon, XIcon } from '@heroicons/react/solid';
 import { useState } from 'react'
+import { MenuIcon, PencilAltIcon, XIcon } from '@heroicons/react/solid';
 import { useDispatch } from 'react-redux';
 import { startLogout } from '../../actions/auth';
-import { JournalEntries } from './JournalEntries';
+import { JournalEntries } from './';
 
 export const SideBar = () => {
     const [showSidebar, setShowSidebar] = useState(false);

@@ -1,5 +1,4 @@
 import { StarIcon } from '@heroicons/react/outline'
-import React from 'react'
 
 export const NothingSelected = () => {
     return (
