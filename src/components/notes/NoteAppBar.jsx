@@ -1,5 +1,5 @@
 import React from 'react'
-import { SideBar } from '../journal/SideBar'
+import { SideBar } from '../journal'
 
 export const NoteAppBar = () => {
     return (
