@@ -1,6 +1,23 @@
-# Getting Started with Create React App
+# Ejecutar localmente
+## Paso 1.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Crear un archivo ```.env.local``` cons las siguientes variables de entorno.
+```
+REACT_APP_FIREBASE_API_KEY
+REACT_APP_FIREBASE_AUTH_DOMAIN
+REACT_APP_FIREBASE_PROJECT_ID
+REACT_APP_FIREBASE_STORAGE_BUCKET
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID
+REACT_APP_FIREBASE_APP_ID
+```
+## Paso 2.
+
+Ejecutar la linea de comando ```npm install```
+
+
+## Paso 3.
+Ejecutar ```npm run start```, la aplicación correrá en ```localhost:3000```.
+
 
 ## Available Scripts
 
