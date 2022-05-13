@@ -1,13 +1,20 @@
 import { useState } from 'react'
 import { MenuIcon, PencilAltIcon, XIcon } from '@heroicons/react/solid';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { startLogout } from '../../actions/auth';
 import { JournalEntries } from './';
+import {startNewNote} from "../../actions/notes";
 
 export const SideBar = () => {
     const [showSidebar, setShowSidebar] = useState(false);
 
+    const {name} = useSelector(state => state?.auth);
+
     const dispatch = useDispatch()
+
+    const handleAddEntry = () => {
+        dispatch( startNewNote() );
+    }
 
     const logout = () => {
         dispatch(startLogout());
@@ -34,10 +41,10 @@ export const SideBar = () => {
             <div className={`top-0 left-0 w-[25vw] min-w-min rounded-r-3xl bg-sky-900 text-white fixed h-full z-40 ease-in-out duration-300  ${showSidebar ? "translate-x-0 " : "-translate-x-full"
                 }`}>
 
-                <h3 className="mt-20 text-center text-3xl font-semibold text-white">Hola René</h3>
+                <h3 className="mt-20 text-center text-3xl font-semibold text-white">Hola {name}</h3>
                 {/* Options */}
                 <div className=" text-white mt-10 justify-start flex flex-row items-center w-full mx-10 cursor-pointer hover:text-gray-400 transition-all"
-                    onClick={() => { console.log('click'); }}>
+                    onClick={handleAddEntry}>
                     <h2 className="text-xl font-medium 
                         ">Nueva entrada
                     </h2>
