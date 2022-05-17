@@ -14,6 +14,7 @@ export const NoteForm = () => {
         >
             <div className="min-w-fit w-2/5 ">
                 <input
+                    autoFocus
                     {...register('title', { required: "Este campo es requerido", maxLength: 30, })}
                     placeholder="Algún título asombroso"
                     type="text"
