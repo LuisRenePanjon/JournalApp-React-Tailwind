@@ -6,6 +6,7 @@ import { login } from '../actions/auth';
 import { LoadingPage } from '../components/common';
 import { JournalPage } from '../pages/journal';
 import { AuthLayout } from '../components/auth';
+import { startLoadingNotes } from '../actions/notes';
 
 export const AppRouter = () => {
 
@@ -21,6 +22,7 @@ export const AppRouter = () => {
             if (user?.uid) {
                 dispatch(login(user.uid, user.displayName));
                 setIsLogged(true);
+                dispatch(startLoadingNotes());
             } else {
                 setIsLogged(false);
             }
