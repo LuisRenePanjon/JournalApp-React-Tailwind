@@ -38,7 +38,7 @@ export const SideBar = () => {
                 />
             )}
 
-            <div className={`top-0 left-0 w-[25vw] min-w-min rounded-r-3xl bg-sky-900 text-white fixed h-full z-40 ease-in-out duration-300  ${showSidebar ? "translate-x-0 " : "-translate-x-full"
+            <div className={`top-0 left-0 w-[30vw] min-w-min rounded-r-3xl bg-sky-900 text-white fixed h-full z-40 ease-in-out duration-300  ${showSidebar ? "translate-x-0 " : "-translate-x-full"
                 }`}>
 
                 <h3 className="mt-20 text-center text-3xl font-semibold text-white">Hola {name}</h3>
