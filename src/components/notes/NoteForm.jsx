@@ -1,19 +1,24 @@
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
+import { activeNote, startSaveNote } from '../../actions/notes';
 
 export const NoteForm = () => {
-    const activeNote = useSelector(state => state.notes.active);
-    const { register, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues: useMemo(() => activeNote, [activeNote]) });
+
+    const dispatch = useDispatch()
+    const note = useSelector(state => state.notes.active);
+    const { register, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues: useMemo(() => note, [note]) });
 
     useEffect(() => {
-        reset(activeNote);
-    }, [activeNote, reset]);
+        reset(note);
+    }, [note, reset]);
 
 
     const onSubmit = (data) => {
-        console.log(data);
+        dispatch(activeNote(note.id, {...data}));
+        dispatch(startSaveNote({ ...data, id: note.id}))
+        console.log(note);
     }
     return (
         <form className="flex flex-col h-full items-center m-20 min-w-max"
@@ -40,11 +45,19 @@ export const NoteForm = () => {
                 />
                 <ErrorMessage errors={errors} name="body" as="p" className='text-red-600' />
             </div>
-            <div className="my-2 p-4 w-2/5 flex items-center justify-center rounded-lg border-2 border-dashed border-current text-gray-600  cursor-pointer min-w-fit">
-                <img src="http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg" alt="placeholder de imagen" className="h-28 rounded-lg shadow-lg min-w-fit"
-                />
-            </div>
-            <input type="submit" value="Guardar" className="my-2 py-4 px-8 bg-gray-900 text-white font-semibold rounded-lg"/>
+            {note.url ?
+                <div className="my-2 p-4 w-2/5 flex items-center justify-center rounded-lg border-2 border-dashed border-current text-gray-600  cursor-pointer min-w-fit">
+                    <img src={note.url} alt="placeholder de imagen" className="h-28 rounded-lg shadow-lg min-w-fit"
+                    />
+                </div>
+                :
+
+                <div className="my-2 p-4 w-2/5 flex items-center justify-center rounded-lg border-2 border-dashed border-current text-gray-600  cursor-pointer min-w-fit">
+                    <img src="http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg" alt="placeholder de imagen" className="h-28 rounded-lg shadow-lg min-w-fit"
+                    />
+                </div>
+            }
+            <input type="submit" value="Guardar" className="my-2 py-4 px-8 bg-gray-900 text-white font-semibold rounded-lg cursor-pointer" />
 
         </form>
     )
