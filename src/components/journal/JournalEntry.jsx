@@ -16,11 +16,10 @@ export const JournalEntry = ({ id, title, body, date, url }) => {
         <div onClick={handleEntryClick}>
             <div className="bg-white rounded-md shadow-md p-5 flex flex-row text-black justify-between m-5 cursor-pointer">
                 {url &&
-                    <div style={{
-                        backgroundImage: `url(${url})`,
-                        backgroundSize: 'cover',
-
-                    }} />
+                    <div className=" h-16 rounded-lg shadow-lg overflow-hidden" >
+                        <img src={url} alt="dsa" className="w-full h-full"/>
+                    </div>
+                    
                 }
 
                 <div>
