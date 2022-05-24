@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
-import { activeNote, startSaveNote } from '../../actions/notes';
+import { activeNote, startSaveNote, startUploadingImage } from '../../actions/notes';
 
 export const NoteForm = () => {
 
@@ -16,14 +16,27 @@ export const NoteForm = () => {
 
 
     const onSubmit = (data) => {
-        dispatch(activeNote(note.id, {...data}));
-        dispatch(startSaveNote({ ...data, id: note.id}))
-        console.log(note);
+        dispatch(activeNote(note.id, { ...data }));
+        dispatch(startSaveNote({ ...data, id: note.id }));
     }
+
+    const handlePictureClick = () => {
+        document.getElementById('file-input').click();
+    }
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file){
+            dispatch(startUploadingImage(file));
+        }
+    }
+
     return (
         <form className="flex flex-col h-full items-center m-20 min-w-max"
             onSubmit={handleSubmit(onSubmit)}
         >
+            {/* File input */}
+            <input id="file-input" type="file" style={{ display: 'none'}} onChange={handleFileChange} />
             <div className="min-w-fit w-2/5 ">
                 <input
                     autoFocus
@@ -46,13 +59,13 @@ export const NoteForm = () => {
                 <ErrorMessage errors={errors} name="body" as="p" className='text-red-600' />
             </div>
             {note.url ?
-                <div className="my-2 p-4 w-2/5 flex items-center justify-center rounded-lg border-2 border-dashed border-current text-gray-600  cursor-pointer min-w-fit">
+                <div onClick={handlePictureClick} className="my-2 p-4 w-2/5 flex items-center justify-center rounded-lg border-2 border-dashed border-current text-gray-600  cursor-pointer min-w-fit">
                     <img src={note.url} alt="placeholder de imagen" className="h-28 rounded-lg shadow-lg min-w-fit"
                     />
                 </div>
                 :
 
-                <div className="my-2 p-4 w-2/5 flex items-center justify-center rounded-lg border-2 border-dashed border-current text-gray-600  cursor-pointer min-w-fit">
+                <div onClick={handlePictureClick} className="my-2 p-4 w-2/5 flex items-center justify-center rounded-lg border-2 border-dashed border-current text-gray-600  cursor-pointer min-w-fit">
                     <img src="http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg" alt="placeholder de imagen" className="h-28 rounded-lg shadow-lg min-w-fit"
                     />
                 </div>
