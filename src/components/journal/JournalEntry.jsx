@@ -14,16 +14,16 @@ export const JournalEntry = ({ id, title, body, date, url }) => {
     }
     return (
         <div onClick={handleEntryClick}>
-            <div className="bg-white rounded-md shadow-md p-5 flex flex-row text-black justify-between m-5 cursor-pointer">
+            <div className="bg-white rounded-md shadow-md py-3 px-1  flex flex-row text-black justify-between m-5 cursor-pointer">
                 {url &&
-                    <div className=" h-16 rounded-lg shadow-lg overflow-hidden" >
-                        <img src={url} alt="dsa" className="w-full h-full"/>
+                    <div className=" h-16 rounded-lg shadow-lg overflow-hidden mx-1" >
+                        <img src={url} alt="Note Background" className="w-24 h-full"/>
                     </div>
                     
                 }
 
                 <div>
-                    <h1>{title}</h1>
+                    <h1 className="font-bold text-xl">{title}</h1>
                     <h3>{body}</h3>
                 </div>
                 <div className="flex justify-center flex-col items-center  h-full w-20">
