@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
-import { activeNote, startSaveNote, startUploadingImage } from '../../actions/notes';
+import {activeNote, startDeletingNote, startSaveNote, startUploadingImage} from '../../actions/notes';
 
 export const NoteForm = () => {
 
@@ -29,6 +29,10 @@ export const NoteForm = () => {
         if (file){
             dispatch(startUploadingImage(file));
         }
+    }
+
+    const handleDeleteClick = () => {
+        dispatch(startDeletingNote(note.id));
     }
 
     return (
@@ -70,8 +74,11 @@ export const NoteForm = () => {
                     />
                 </div>
             }
-            <input type="submit" value="Guardar" className="my-2 py-4 px-8 bg-gray-900 text-white font-semibold rounded-lg cursor-pointer" />
+            <div className="flex flex-row">
+            <input type="submit" value="Guardar" className="my-2 mx-1 py-4 w-32 bg-gray-900 hover:bg-gray-500 text-white font-semibold rounded-lg cursor-pointer" />
+            <button type={"button"} onClick={handleDeleteClick} className="mx-1 my-2 py-4 w-32 bg-red-900 hover:bg-red-500 text-white font-semibold rounded-lg cursor-pointer">Borrar</button>
 
+            </div>
         </form>
     )
 }
