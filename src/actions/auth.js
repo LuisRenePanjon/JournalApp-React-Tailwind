@@ -1,5 +1,6 @@
 import { auth, googleAuthProvider } from '../firebase/firebaseConfig';
 import { types } from '../types/types';
+import { cleanNotes } from './notes';
 import {
     removeErrorAction,
     setErrorAction,
@@ -87,6 +88,7 @@ export const startLogout = () => {
     return async (dispatch) => {
         await auth.signOut(auth.getAuth());
 		dispatch(logout());
+        dispatch(cleanNotes());
     };
 };
 
