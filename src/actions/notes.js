@@ -1,5 +1,5 @@
 import { db } from '../firebase/firebaseConfig';
-import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore';
 import { types } from '../types/types';
 import { loadNotes } from '../utils/loadNotes';
 import Swal from 'sweetalert2';
@@ -102,5 +102,34 @@ export const startUploadingImage = (file) => {
         
     }
 }
+
+export const startDeletingNote = (noteId) => {
+    return async (dispatch, getState) => {
+        Swal.fire({
+            title: 'Deleting...',
+            text: 'Please wait',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        })
+        const uid = getState().auth.uid;
+        const collRef = collection(db, uid);
+        const noteRef = doc(collRef, 'journal', 'notes', noteId);
+        await deleteDoc(noteRef);
+        dispatch(deleteNote(noteId));
+        Swal.close();
+    };
+}
+
+export const deleteNote = (id) => ({
+    type: types.notesDeleted,
+    payload: id,
+});
+
+export const cleanNotes = () => ({
+    type: types.notesLogoutCleaning,
+});
+
 
 
